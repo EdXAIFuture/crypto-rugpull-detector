@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crypto Rug Pull Detector</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to AI Crypto Rug Pull Detector</h1>
+    <p>Enter the contract address of the crypto project you want to analyze:</p>
+    <input type="text" id="contractAddress" placeholder="Enter Contract Address">
+    <button onclick="analyzeProject()">Analyze</button>
+    <p id="result"></p>
+
+    <script>
+        async function analyzeProject() {
+            const address = document.getElementById("contractAddress").value;
+            if (!address) {
+                alert("Please enter a contract address.");
+                return;
+            }
+            document.getElementById("result").innerText = "Analyzing... Please wait.";
+            const response = await fetch(`/analyze?address=${address}`);
+            const result = await response.text();
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>
