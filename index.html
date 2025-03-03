@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crypto Rug Pull Detector</title>
+    <link rel="stylesheet" href="public/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Crypto Rug Pull Detector</h1>
+        <p>Enter the contract address of the crypto project you want to analyze:</p>
+        <input type="text" id="contractAddress" placeholder="Enter Contract Address">
+        <button onclick="analyzeProject()">Analyze</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        async function analyzeProject() {
+            const address = document.getElementById("contractAddress").value.trim();
+            if (!address) {
+                alert("Please enter a valid contract address.");
+                return;
+            }
+
+            document.getElementById("result").innerText = "Analyzing... Please wait.";
+
+            try {
+                const response = await fetch(`/api/analyze?address=${address}`);
+                if (!response.ok) {
+                    throw new Error("API request failed");
+                }
+
+                const result = await response.json();
+                document.getElementById("result").innerHTML = `
+                    <strong>Analysis for:</strong> ${result.contract} <br>
+                    <strong>Risk Score:</strong> ${result.riskScore}/100 <br>
+                    <strong>Risk Level:</strong> ${result.riskLevel}
+                `;
+            } catch (error) {
+                document.getElementById("result").innerText = "Error: Could not fetch analysis.";
+            }
+        }
+    </script>
+</body>
+</html>
