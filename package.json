@@ -1,0 +1,12 @@
+{
+  "name": "crypto-rugpull-detector",
+  "version": "1.0.0",
+  "main": "api/analyze.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node api/analyze.js"
+  }
+}
